@@ -19,10 +19,14 @@ function fetchPhotos()
                 .attr("src", $path_to_backend + val.tn_src)
                 .attr("id", val.id).appendTo($tn_div)
                 .attr("class", "tn")
+                .attr("width", 140)
+                .css("padding", "12")
+                .css("padding-top", "3")
                 .wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
         });
     });
 };
+
 
 // verification for the file
 $(':file').on('change', function() 

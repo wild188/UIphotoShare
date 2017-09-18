@@ -7,18 +7,26 @@
     <title>My 331 Photos</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <style>
+    .thumbs{
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    </style>
+
 </head>
 <body>
-    <h1>All Photos</h1>
+    <h1 style="text-align: center">All Photos</h1>
 
-    <div id="thumbs"></div>
+    <div style="align-items: center; padding: 10px" id="thumbs"></div>
 
     <h1>Upload a Photo</h1>
 
     <form name="uploader" enctype="multipart/form-data">
         <input name="fupload" type="file" />
         <p><label for="description">Enter a Description: </label>
-        <textarea rows="6" cols="50" id="description" name="description"></textarea></p>
+        <textarea rows="3" cols="50" id="description" name="description"></textarea></p>
         <input type="button" value="Upload Photo">
     </form>
     <progress value="" max=""></progress>
