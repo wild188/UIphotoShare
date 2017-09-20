@@ -19,6 +19,10 @@
 <body>
     <h1 style="text-align: center">All Photos</h1>
 
+    <input type="button" value="Select Multiple Photos" style="float: right; padding: 1%; margin: 1%" id="select">
+
+
+
     <div style="align-items: center; padding: 10px" id="thumbs"></div>
 
     <h1>Upload a Photo</h1>
@@ -27,7 +31,7 @@
         <input name="fupload" type="file" />
         <p><label for="description">Enter a Description: </label>
         <textarea rows="3" cols="50" id="description" name="description"></textarea></p>
-        <input type="button" value="Upload Photo">
+        <input type="button" value="Upload Photo" id="uploadPic">
     </form>
     <progress value="" max=""></progress>
     <script src="main.js"></script>
