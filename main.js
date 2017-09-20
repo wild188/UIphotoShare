@@ -23,8 +23,8 @@ function fetchPhotos()
                 .css("padding", "12")
                 .css("margin", "auto")
                 .css("vertical-align", "middle")
-                .wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
-        });
+                //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
+            });
     });
 };
 
@@ -77,5 +77,6 @@ $(document.getElementById("uploadPic")).on('click', function()
 
 $(document.getElementById("select")).on('click', function()
 {
-    alert("TEST");
+   // alert('test');
+    toggleButton(document.getElementById("select"));
 });
