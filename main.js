@@ -79,4 +79,29 @@ $(document.getElementById("select")).on('click', function()
 {
    // alert('test');
     toggleButton(document.getElementById("select"));
+
+    var $tn_div = $("#thumbs");
+    // just in case there's anything still in the thumbnails div, clear it out
+    $tn_div.empty();
+
+    // retrieve images from the database
+    $endpoint = $path_to_backend + 'getPhotos.php';
+    $.getJSON($endpoint, function(data)
+    {
+        jQuery.each(data, function(key, val)
+        {
+            console.log($path_to_backend + val.tn_src);
+            // append the images to the div, and make them clickable for details
+            $("<img />")
+                .attr("src", $path_to_backend + val.tn_src)
+                .attr("id", val.id).appendTo($tn_div)
+                .attr("class", "tn")
+                .attr("width", "120")
+                .css("padding", "12")
+                .css("margin", "auto")
+                .css("vertical-align", "middle")
+                .wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
+            });
+    });
+
 });
