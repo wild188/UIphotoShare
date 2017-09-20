@@ -1,7 +1,17 @@
-$(document).ready(fetchPhotos());
+$(document).ready(function(){
+        fetchPhotos();
+});
+
+
+var selected = false;
+var toDelete = [];
+
+(document.getElementById("delButton")).style.visibility = "collapse";
+(document.getElementById("cancel")).style.visibility = "collapse";
 
 function fetchPhotos()
 {
+
     // get the div where the i6ages should go
     var $tn_div = $("#thumbs");
     // just in case there's anything still in the thumbnails div, clear it out
@@ -33,6 +43,7 @@ function fetchPhotos()
             });
             
     });
+    
 };
 
 
@@ -82,33 +93,30 @@ $(document.getElementById("uploadPic")).on('click', function()
     });
 });
 
+
+$(document.getElementById("cancel")).on('click', function(){
+
+    $(".tn").off();
+    toDelete = [];
+    (document.getElementById("delButton")).style.visibility = "hidden";
+    (document.getElementById("cancel")).style.visibility = "hidden";
+
+});
+
 $(document.getElementById("select")).on('click', function()
 {
-   // alert('test');
-    toggleButton(document.getElementById("select"));
 
-    var $tn_div = $("#thumbs");
-    // just in case there's anything still in the thumbnails div, clear it out
-    $tn_div.empty();
+    $(".tn").on('click', function(){
+        toDelete.push($(this).attr('id'));
+        console.log(toDelete);
+        console.log(toDelete.length);
+        if(toDelete.length > 0){
+            (document.getElementById("delButton")).style.visibility = "visible";
+            (document.getElementById("cancel")).style.visibility = "visible";
+        }
 
-    // retrieve images from the database
-    $endpoint = $path_to_backend + 'getPhotos.php';
-    $.getJSON($endpoint, function(data)
-    {
-        jQuery.each(data, function(key, val)
-        {
-            console.log($path_to_backend + val.tn_src);
-            // append the images to the div, and make them clickable for details
-            $("<img />")
-                .attr("src", $path_to_backend + val.tn_src)
-                .attr("id", val.id).appendTo($tn_div)
-                .attr("class", "tn")
-                .attr("width", "120")
-                .css("padding", "12")
-                .css("margin", "auto")
-                .css("vertical-align", "middle")
-                .wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
-            });
-    });
+        $(this).css("border-style", "solid");
+        
 
+    })
 });
