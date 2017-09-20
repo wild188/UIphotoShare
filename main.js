@@ -2,7 +2,7 @@ $(document).ready(fetchPhotos());
 
 function fetchPhotos()
 {
-    // get the div where the images should go
+    // get the div where the i6ages should go
     var $tn_div = $("#thumbs");
     // just in case there's anything still in the thumbnails div, clear it out
     $tn_div.empty();
@@ -19,12 +19,19 @@ function fetchPhotos()
                 .attr("src", $path_to_backend + val.tn_src)
                 .attr("id", val.id).appendTo($tn_div)
                 .attr("class", "tn")
-                .attr("width", "120")
+                //.attr("width", "120")
                 .css("padding", "12")
                 .css("margin", "auto")
-                .css("vertical-align", "middle")
+                .css("vertical-align", "middle");
                 //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
+
+                if($("#"+val.id).height() > $("#"+val.id).width()){
+                    $("#"+val.id).attr("height", "120");
+                } else {
+                    $("#"+val.id).attr("width", "120");                    
+                }
             });
+            
     });
 };
 
