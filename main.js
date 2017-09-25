@@ -83,6 +83,10 @@ function showPhoto(photoID){
     $("#modal1").modal("open");
     getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
     $("#singleDelete").click(function() {deletePhoto(photoID)});
+    $("#singleDelete").removeClass("disabled");
+    $("#exitModal").removeClass("disabled");
+    $("#edit").click(function(){allowUpdate(photoID)});
+    $("#edit").html("Edit");
 }
 
 function getPhoto(photoID, imageTag, descriptionTag){
@@ -104,6 +108,36 @@ function getPhoto(photoID, imageTag, descriptionTag){
             .attr("id", "photoDescription")
             .html(photo.description)
             .appendTo(descriptionTag);
+    });
+}
+
+function updateDescription(photoID, description){
+    console.log("Updating description");
+    $endpoint = $path_to_backend + 'updatePhoto.php';
+    $.post($endpoint, {id: photoID, description: description}, function(data){
+        console.log(data);
+        showPhoto(photoID);
+    });
+}
+
+function allowUpdate(photoID){
+    $("#singleDelete").addClass("disabled");
+    $("#singleDelete").off("click");
+    $("#exitModal").addClass("disabled");
+    $("#edit").html("Submit Change");
+
+    $("#descriptionDiv").empty();
+    $("<input/>")
+        .attr("id", "editDescription")
+        //.attr("class", "disabled")
+        .attr("type", "text")
+        //.prop('disabled', true)//.attr("disabled")
+        .val($("#photoDescription").html())
+        //.html(photo.description)
+        .appendTo($("#descriptionDiv"));
+
+    $("#edit").click(function(){
+        updateDescription(photoID, $("#editDescription").val())
     });
 }
 
