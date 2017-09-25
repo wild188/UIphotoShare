@@ -1,0 +1,16 @@
+
+.modal {
+    width: 75% !important ; 
+    height: 90% !important ;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    top: 5% !important; 
+}
+
+.photoView{
+    /* max-height: 70%;
+    max-width: 90%; */
+    margin: auto;
+    left: 50%;
+    right: 50%;
+}

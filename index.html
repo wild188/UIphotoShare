@@ -7,6 +7,7 @@
     <title>My 331 Photos</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
     .thumbs{
@@ -42,6 +43,26 @@
         <input type="button" value="Upload Photo" id="uploadPic">
     </form>
     <progress value="" max=""></progress>
+
+    <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <!-- <h4>Modal Header</h4>
+      <p>A bunch of text</p> -->
+      <div class="center-align" id="photoDiv">
+
+      </div>
+      <div id="descriptionDiv">
+
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button id="singleDelete" class="modal-action modal-close waves-effect waves-green btn-flat red">Delete</button>
+        <button id="edit" class="waves-effect waves-green btn-flat green">Edit</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
+    </div>
+  </div>
+
     <script src="main.js"></script>
 </body>
 </html>

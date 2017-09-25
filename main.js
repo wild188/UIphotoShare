@@ -1,5 +1,6 @@
 $(document).ready(function(){
         fetchPhotos();
+        $('.modal').modal();
 });
 
 
@@ -23,12 +24,14 @@ function fetchPhotos()
     {
         jQuery.each(data, function(key, val)
         {
-            console.log($path_to_backend + val.tn_src);
+            //console.log($path_to_backend + val.tn_src);
             // append the images to the div, and make them clickable for details
             $("<img />")
                 .attr("src", $path_to_backend + val.tn_src)
                 .attr("id", val.id).appendTo($tn_div)
-                .attr("class", "tn")
+                .attr("class", "modal-trigger tn")
+                .attr("onclick", "showPhoto(" + val.id + ")")  //
+                //.attr("href", "#modal1")
                 //.attr("width", "120")
                 .css("padding", "12")
                 .css("margin", "auto")
@@ -46,6 +49,41 @@ function fetchPhotos()
     
 };
 
+function showPhoto(photoID){
+    $("#modal1").modal("open");
+    getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
+    $("#singleDelete").click(deletePhoto(photoID));
+}
+
+function getPhoto(photoID, imageTag, descriptionTag){
+    $endpoint = $path_to_backend + 'viewPhoto.php' + '?id=' + photoID;
+    modalheight = $("#modal1").height();
+    $.getJSON($endpoint, function(data)
+    {
+        var photo = data[0];
+        console.log(modalheight);
+        imageTag.empty();
+        $("<img />")
+        .attr("src", $path_to_backend + photo.src)
+        .attr("class", "photoView")
+        .height(modalheight * .7)
+        .appendTo(imageTag);
+
+        descriptionTag.empty();
+        $("<p />")
+            .attr("id", "photoDescription")
+            .html(photo.description)
+            .appendTo(descriptionTag);
+    });
+}
+
+function deletePhoto(photoID){
+    $endpoint = $path_to_backend + 'deletePhoto.php';
+    $.post($endpoint, {id: photoID}, function(data){
+        console.log(data);
+        fetchPhotos();
+    });
+}
 
 // verification for the file
 $(':file').on('change', function() 
