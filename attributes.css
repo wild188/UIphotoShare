@@ -1,0 +1,13 @@
+#select{
+    position: sticky;
+    top: 10%;
+}
+
+.forDelete{
+    position: sticky;
+    top: 15.5%;
+}
+
+.giveborder{
+    border: solid;
+}

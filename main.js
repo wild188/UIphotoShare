@@ -13,7 +13,7 @@ var toDelete = [];
 function fetchPhotos()
 {
 
-    // get the div where the i6ages should go
+    // get the div where the images should go
     var $tn_div = $("#thumbs");
     // just in case there's anything still in the thumbnails div, clear it out
     $tn_div.empty();
@@ -28,14 +28,14 @@ function fetchPhotos()
             // append the images to the div, and make them clickable for details
             $("<img />")
                 .attr("src", $path_to_backend + val.tn_src)
-                .attr("id", val.id).appendTo($tn_div)
+                .attr("id", val.id)
                 .attr("class", "modal-trigger tn")
                 .attr("onclick", "showPhoto(" + val.id + ")")  //
                 //.attr("href", "#modal1")
                 //.attr("width", "120")
                 .css("padding", "12")
                 .css("margin", "auto")
-                .css("vertical-align", "middle");
+                .css("vertical-align", "middle").appendTo($tn_div);
                 //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
 
                 if($("#"+val.id).height() > $("#"+val.id).width()){
@@ -43,16 +43,46 @@ function fetchPhotos()
                 } else {
                     $("#"+val.id).attr("width", "120");                    
                 }
+
+                
             });
             
     });
+
+
+     // retrieve images from the database
+    //  $endpoint = $path_to_backend + 'getPhotos.php';
+    //  $.getJSON($endpoint, function(data)
+    //  {
+    //      jQuery.each(data, function(key, val)
+    //      {
+    //          //console.log($path_to_backend + val.tn_src);
+    //          // append the images to the div, and make them clickable for details
+    //          $("<img />")
+    //              .attr("src", $path_to_backend + val.tn_src)
+    //              .attr("id", val.id).appendTo($tn_div)
+    //              .attr("class", "tn")
+    //              //.attr("width", "120")
+    //              .css("padding", "12")
+    //              .css("margin", "auto")
+    //              .css("vertical-align", "middle");
+    //              //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
+ 
+    //              if($("#"+val.id).height() > $("#"+val.id).width()){
+    //                  $("#"+val.id).attr("height", "120");
+    //              } else {
+    //                  $("#"+val.id).attr("width", "120");                    
+    //              }
+    //          });
+             
+    //  });
     
 };
 
 function showPhoto(photoID){
     $("#modal1").modal("open");
     getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
-    $("#singleDelete").click(deletePhoto(photoID));
+    $("#singleDelete").click(function() {deletePhoto(photoID)});
 }
 
 function getPhoto(photoID, imageTag, descriptionTag){
@@ -145,7 +175,19 @@ $(document.getElementById("select")).on('click', function()
 {
 
     $(".tn").on('click', function(){
-        toDelete.push($(this).attr('id'));
+        var current = $(this).attr('id');
+
+        if(toDelete.indexOf(current) < 0){
+            toDelete.push(current);
+            
+            //show x
+            $(this).attr("src", "x.png");
+
+        } else {
+            toDelete.splice(toDelete.indexOf(current), 1);
+            //remove x
+            
+        }
         console.log(toDelete);
         console.log(toDelete.length);
         if(toDelete.length > 0){
@@ -153,7 +195,6 @@ $(document.getElementById("select")).on('click', function()
             (document.getElementById("cancel")).style.visibility = "visible";
         }
 
-        $(this).css("border-style", "solid");
         
 
     })
