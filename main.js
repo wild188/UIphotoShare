@@ -152,6 +152,7 @@ function deletePhoto(photoID){
     });
 }
 
+
 // verification for the file
 $(':file').on('change', function() 
 {
