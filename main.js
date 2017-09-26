@@ -82,9 +82,11 @@ function fetchPhotos()
 function showPhoto(photoID){
     $("#modal1").modal("open");
     getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
+    $("#singleDelete").off("click");
     $("#singleDelete").click(function() {deletePhoto(photoID)});
     $("#singleDelete").removeClass("disabled");
     $("#exitModal").removeClass("disabled");
+    $("#edit").off("click");
     $("#edit").click(function(){allowUpdate(photoID)});
     $("#edit").html("Edit");
 }
@@ -122,8 +124,9 @@ function updateDescription(photoID, description){
 
 function allowUpdate(photoID){
     $("#singleDelete").addClass("disabled");
-    $("#singleDelete").off("click");
+    //$("#singleDelete").off("click");
     $("#exitModal").addClass("disabled");
+    $("#edit").off("click");
     $("#edit").html("Submit Change");
 
     $("#descriptionDiv").empty();
