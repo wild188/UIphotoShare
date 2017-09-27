@@ -6,6 +6,8 @@ $(document).ready(function(){
 
 var selected = false;
 var toDelete = [];
+var multiMode = false;
+var vis = "hidden";
 
 (document.getElementById("delButton")).style.visibility = "collapse";
 (document.getElementById("cancel")).style.visibility = "collapse";
@@ -35,7 +37,7 @@ function fetchPhotos()
                 //.attr("width", "120")
                 .css("padding", "12")
                 .css("margin", "auto")
-                .css("vertical-align", "middle").appendTo($tn_div);
+                .css("vertical-align", "middle").appendTo($tn_div)
                 //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
 
                 if($("#"+val.id).height() > $("#"+val.id).width()){
@@ -49,46 +51,63 @@ function fetchPhotos()
             
     });
 
-
-     // retrieve images from the database
-    //  $endpoint = $path_to_backend + 'getPhotos.php';
-    //  $.getJSON($endpoint, function(data)
-    //  {
-    //      jQuery.each(data, function(key, val)
-    //      {
-    //          //console.log($path_to_backend + val.tn_src);
-    //          // append the images to the div, and make them clickable for details
-    //          $("<img />")
-    //              .attr("src", $path_to_backend + val.tn_src)
-    //              .attr("id", val.id).appendTo($tn_div)
-    //              .attr("class", "tn")
-    //              //.attr("width", "120")
-    //              .css("padding", "12")
-    //              .css("margin", "auto")
-    //              .css("vertical-align", "middle");
-    //              //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
- 
-    //              if($("#"+val.id).height() > $("#"+val.id).width()){
-    //                  $("#"+val.id).attr("height", "120");
-    //              } else {
-    //                  $("#"+val.id).attr("width", "120");                    
-    //              }
-    //          });
-             
-    //  });
     
 };
 
-function showPhoto(photoID){
-    $("#modal1").modal("open");
-    getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
-    $("#singleDelete").off("click");
-    $("#singleDelete").click(function() {deletePhoto(photoID)});
-    $("#singleDelete").removeClass("disabled");
-    $("#exitModal").removeClass("disabled");
-    $("#edit").off("click");
-    $("#edit").click(function(){allowUpdate(photoID)});
-    $("#edit").html("Edit");
+
+// function fetchPhotos(src)
+// {
+//     document.getElementById("xImg").style.visibility = "collapse";
+//
+//     // get the div where the images should go
+//     var $tn_div = $("#thumbs");
+//     // just in case there's anything still in the thumbnails div, clear it out
+//     $tn_div.empty();
+//
+//     // retrieve images from the database
+//     $endpoint = $path_to_backend + 'getPhotos.php';
+//     $.getJSON($endpoint, function(data)
+//     {
+//         jQuery.each(data, function(key, val)
+//         {
+//             //console.log($path_to_backend + val.tn_src);
+//             // append the images to the div, and make them clickable for details
+//             $("<img />")
+//                 .attr("src", $path_to_backend + val.tn_src)
+//                 .attr("src", src)
+//                 .attr("height", "120")
+//                // .attr("id", val.id)
+//                 .attr("class", "modal-trigger tn")
+//                 .css("padding", "12")
+//                 .css("margin", "auto")
+//                 .css("vertical-align", "middle").appendTo($tn_div);
+//             //.wrap('<a href="viewPhoto.html?id=' + val.id + '"></a>');
+//
+//
+//
+//         });
+//
+//     });
+//
+//
+// };
+
+function showPhoto(photoID) {
+    if (!multiMode) {
+        $("#modal1").modal("open");
+        getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
+        $("#singleDelete").off("click");
+        $("#singleDelete").click(function () {
+            deletePhoto(photoID)
+        });
+        $("#singleDelete").removeClass("disabled");
+        $("#exitModal").removeClass("disabled");
+        $("#edit").off("click");
+        $("#edit").click(function () {
+            allowUpdate(photoID)
+        });
+        $("#edit").html("Edit");
+    }
 }
 
 function getPhoto(photoID, imageTag, descriptionTag){
@@ -148,7 +167,8 @@ function deletePhoto(photoID){
     $endpoint = $path_to_backend + 'deletePhoto.php';
     $.post($endpoint, {id: photoID}, function(data){
         console.log(data);
-        fetchPhotos();
+        if(multiMode)
+            fetchPhotos();
     });
 }
 
@@ -201,16 +221,26 @@ $(document.getElementById("uploadPic")).on('click', function()
 
 $(document.getElementById("cancel")).on('click', function(){
 
+    multiMode = false;
     $(".tn").off();
     toDelete = [];
     (document.getElementById("delButton")).style.visibility = "hidden";
     (document.getElementById("cancel")).style.visibility = "hidden";
+    fetchPhotos();
 
 });
 
 $(document.getElementById("select")).on('click', function()
 {
+    if(vis == "visible")
+        vis = "hidden";
+    else
+        vis = "visible";
 
+    (document.getElementById("delButton")).style.visibility = vis;
+    (document.getElementById("cancel")).style.visibility = vis;
+
+    multiMode = true;
     $(".tn").on('click', function(){
         var current = $(this).attr('id');
 
@@ -218,7 +248,8 @@ $(document.getElementById("select")).on('click', function()
             toDelete.push(current);
             
             //show x
-            $(this).attr("src", "x.png");
+            console.log("x pos: " + $(this).offset().left);
+            console.log("y pos: " + $(this).offset().top);
 
         } else {
             toDelete.splice(toDelete.indexOf(current), 1);
@@ -232,7 +263,27 @@ $(document.getElementById("select")).on('click', function()
             (document.getElementById("cancel")).style.visibility = "visible";
         }
 
-        
 
     })
 });
+
+
+function deleteMultiPhoto(photos) {
+    for (var i = 0; i < toDelete.length; i++) {
+        deletePhoto(toDelete[i]);
+    }
+    fetchPhotos();
+}
+
+
+$(document.getElementById("delButton")).on('click', function(){
+
+    deleteMultiPhoto(toDelete);
+    multiMode = false;
+
+    toDelete = [];
+    (document.getElementById("delButton")).style.visibility = "hidden";
+    (document.getElementById("cancel")).style.visibility = "hidden";
+
+});
+
