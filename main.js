@@ -222,8 +222,6 @@ $(document.getElementById("select")).on('click', function()
             toDelete.push(current);
             
             //show x
-            console.log("x pos: " + $(this).offset().left);
-            console.log("y pos: " + $(this).offset().top);
             $(this).css("border", "solid red");
 
         } else {

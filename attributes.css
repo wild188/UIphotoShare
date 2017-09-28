@@ -5,13 +5,9 @@
 
 .forDelete{
     position: sticky;
-    top: 90px;
+    top: 60px;
 }
 
 .giveborder{
     border: solid;
-}
-
-.tn{
-    onclick: alert();
 }
