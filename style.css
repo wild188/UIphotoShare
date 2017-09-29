@@ -15,9 +15,41 @@
     right: 50%;
 }
 
+<<<<<<< HEAD
 .twohundred{
     height: 200px;
     width: 200px;
     border: 2px solid black;
     text-align: center;
 }
+=======
+
+
+
+#bar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 500;
+    height: 55px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#a {
+    float: left;
+    text-indent: 70px;
+    font-size: 20px;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    font-family: monospace;
+}
+
+
+
+>>>>>>> 532aaf991cc065d080cad7247d2a27609be2f322

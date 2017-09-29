@@ -1,11 +1,11 @@
 #select{
     position: sticky;
-    top: 10%;
+    top: 50px;
 }
 
 .forDelete{
     position: sticky;
-    top: 15.5%;
+    top: 60px;
 }
 
 .giveborder{

@@ -23,10 +23,16 @@
 </head>
 <body>
 
-    <button id="select" class="giveborder" style="float:right; margin-right: 2%">Select Multiple Photos</button>
-    <p><br/></p>
+    
+    <div class="navbar">
+        <ul id="bar">
+            <li id="a">My 331 Photos</li>
+            <li><button id="select" class="giveborder" style="float:right; margin-right: 2%; margin-top: 10px">Select Multiple Photos</button>
+        </ul>
+    </div>
+    
+    <button id="cancel" class="giveborder forDelete" style="float:right; margin-right:50px;">Cancel</button>
     <button id="delButton" class="giveborder forDelete" style="float:right; margin-right: 2%">Delete</button>
-    <button id="cancel" class="giveborder forDelete" style="float:right; margin-right: 2%">Cancel</button>
     <p><br/><br/></p>
 
     <h1 style="text-align: center">All Photos</h1>
@@ -34,15 +40,20 @@
 
    <!-- <input type="button" value="Select Multiple Photos" style="float: right; padding: 1%; margin: 1%" id="select"> -->
 
-    
     <div style="align-items: center; padding: 10px" id="thumbs"></div>
 
-    <h1>Upload a Photo</h1>
+    <h1 style="text-indent: 25px;">Upload a Photo</h1>
 
+<!-- <<<<<<< HEAD
     <form name="uploader" enctype="multipart/form-data">
         <input id="fileup" name="fupload" type="file" class="twohundred"/>
         <p><label for="description">Enter a Description: </label>
         <textarea rows="3" cols="50" id="description" name="description"></textarea></p>
+======= -->
+    <form name="uploader" enctype="multipart/form-data" style="margin-left: 45px;">
+        <input name="fupload" type="file" />
+        <p><label for="description">Enter a Description: </label><br>
+        <textarea rows="3" cols="50" id="description" name="description" style="width:500px"></textarea></p>
         <input type="button" value="Upload Photo" id="uploadPic">
     </form>
     <progress value="" max=""></progress>
@@ -52,6 +63,7 @@
     <div class="modal-content">
       <!-- <h4>Modal Header</h4>
       <p>A bunch of text</p> -->
+        <button id="exitModal" class="modal-action modal-close waves-effect waves-green btn-flat col s2 push-s6" style="float:right;"><img src="close.png" style="width:12px;height:12px;"></button>
       <div class="center-align" id="photoDiv">
 
       </div>
@@ -62,7 +74,6 @@
     <div class="modal-footer row">
         <button id="singleDelete" class="modal-action modal-close waves-effect waves-green btn-flat red col s2">Delete</button>
         <button id="edit" class="waves-effect waves-green btn-flat green col s2 push-s6">Edit</button>
-        <button id="exitModal" class="modal-action modal-close waves-effect waves-green btn-flat col s2 push-s6">Exit</button>
         <!-- <a id="exitModal" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Exit</a> -->
     </div>
   </div>
