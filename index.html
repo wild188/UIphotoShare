@@ -6,6 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>My 331 Photos</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="./dropzone.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
     <link rel="stylesheet" href="style.css">
@@ -39,7 +40,7 @@
     <h1>Upload a Photo</h1>
 
     <form name="uploader" enctype="multipart/form-data">
-        <input name="fupload" type="file" />
+        <input id="fileup" name="fupload" type="file" class="twohundred"/>
         <p><label for="description">Enter a Description: </label>
         <textarea rows="3" cols="50" id="description" name="description"></textarea></p>
         <input type="button" value="Upload Photo" id="uploadPic">

@@ -14,3 +14,10 @@
     left: 50%;
     right: 50%;
 }
+
+.twohundred{
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+    text-align: center;
+}

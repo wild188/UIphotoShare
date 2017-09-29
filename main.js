@@ -18,6 +18,36 @@ function fetchPhotos()
     // just in case there's anything still in the thumbnails div, clear it out
     $tn_div.empty();
 
+    // $("<form />")
+    //     .attr()
+
+    //$tn_div.dropzone({ url: "/file/post" });
+    // $tn_div.on('drop', '#dropfile', function(e) {
+    //     e.preventDefault();
+    //     //e.stopPropagation();
+    //     // $(this).css('border', '6px #6BFF38 solid'); //vert
+    //     var file = e.originalEvent.dataTransfer.files;
+    //     //console.log(file);
+    //     //alert(file.name);
+    //     e.stopPropagation();
+    
+    //     return false;
+    // });
+    // $("#fileup").on(
+    //     {
+    //         'dragover': function(e) {
+    //         console.log('dragover');
+    //         e.preventDefault();
+    //     },
+    //         'drop': function(e) {
+    //         var file = e.originalEvent.dataTransfer.files[0];          
+    //         console.log(file);
+            
+    //         e.preventDefault();
+    //         //uploadPhoto(file, "Dragged");
+    //     }
+    // });
+
     // retrieve images from the database
     $endpoint = $path_to_backend + 'getPhotos.php';
     $.getJSON($endpoint, function(data)
@@ -144,6 +174,14 @@ function allowUpdate(photoID){
     });
 }
 
+function uploadPhoto(photoFile, description){
+    $endpoint = $path_to_backend + 'uploadPhoto.php';
+    $.post($endpoint, {fuplaod: photoFile, description: description}, function(data){
+        console.log(data);
+        //fetchPhotos();
+    });
+}
+
 function deletePhoto(photoID){
     $endpoint = $path_to_backend + 'deletePhoto.php';
     $.post($endpoint, {id: photoID}, function(data){
@@ -169,6 +207,7 @@ $(document.getElementById("uploadPic")).on('click', function()
 {
     // for data, we want to submit the photo and the description
     var photoFormData = new FormData(document.forms['uploader']);
+    console.log(document.forms['uploader']);
     $.ajax({
         url: $path_to_backend + 'uploadPhoto.php',
         type: 'POST',
