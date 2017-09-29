@@ -21,36 +21,6 @@ function fetchPhotos()
     // just in case there's anything still in the thumbnails div, clear it out
     $tn_div.empty();
 
-    // $("<form />")
-    //     .attr()
-
-    //$tn_div.dropzone({ url: "/file/post" });
-    // $tn_div.on('drop', '#dropfile', function(e) {
-    //     e.preventDefault();
-    //     //e.stopPropagation();
-    //     // $(this).css('border', '6px #6BFF38 solid'); //vert
-    //     var file = e.originalEvent.dataTransfer.files;
-    //     //console.log(file);
-    //     //alert(file.name);
-    //     e.stopPropagation();
-    
-    //     return false;
-    // });
-    // $("#fileup").on(
-    //     {
-    //         'dragover': function(e) {
-    //         console.log('dragover');
-    //         e.preventDefault();
-    //     },
-    //         'drop': function(e) {
-    //         var file = e.originalEvent.dataTransfer.files[0];          
-    //         console.log(file);
-            
-    //         e.preventDefault();
-    //         //uploadPhoto(file, "Dragged");
-    //     }
-    // });
-
     // retrieve images from the database
     $endpoint = $path_to_backend + 'getPhotos.php';
     $.getJSON($endpoint, function(data)
@@ -255,24 +225,21 @@ $(document.getElementById("uploadPic")).on('click', function()
                 // For handling the progress of the upload
                 myXhr.upload.addEventListener('progress', function(e) {
                     if (e.lengthComputable) {
-                        $('progress').attr({
-                            value: e.loaded,
-                            max: e.total//,
-                            // success: fetchPhotos()
-                        });
-                        // if(e.loaded == e.total){
-                        //     $("uploadmodal").modal("close");
-                        //     fetchPhotos();
-                        // }
+                        var progress = (e.loaded * 100 / e.total) + "%"
+                        console.log(progress);
+                        $('#progress').width(progress);
                     }
                 } , false);
-                myXhr.upload.addEventListener('load', function(){
+            }
+            myXhr.onreadystatechange = function()
+            {
+                if (myXhr.readyState == 4 && myXhr.status == 200)
+                {
+                    console.log(myXhr.responseText); // Another callback here
+                    fetchPhotos();
+                    $("#uploader")[0].reset();
                     $("#uploadmodal").modal("close");
-                    setTimeout(function(){
-                        fetchPhotos();
-                    }, 1500);
-                    
-                })
+                }
             }
             return myXhr;
         }
