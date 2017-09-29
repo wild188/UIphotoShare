@@ -188,6 +188,50 @@ $(':file').on('change', function()
     // alert(file.type);
 });
 
+$(document.getElementById("fileinput")).change(function()
+{
+    var input = $("#fileinput");
+    if(!input.prop("files")){
+        console.log(input);
+        return;
+    }
+    $("#uploadProgress").hide();
+    $("#uploadsubmit").show();
+    console.log($("#fileinput").prop("files")[0]);
+    $("#uploadmodal").modal("open");
+    modalheight = $("#uploadmodal").height();
+    var imageTag = $("#uploadphotodiv");
+    imageTag.empty();
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+        $("<img />")
+            .attr("src", e.target.result)
+            .attr("class", "photoView")
+            .height(modalheight * .7)
+            .appendTo(imageTag);
+    };
+    
+    reader.readAsDataURL(input.prop("files")[0]);
+    $("#uploadDescriptionDiv").empty();
+    $("<input/>")
+        .attr("id", "uploadDescription")
+        //.attr("class", "disabled")
+        .attr("type", "text")
+        //.prop('disabled', true)//.attr("disabled")
+        //.html(photo.description)
+        .appendTo($("#uploadDescriptionDiv"));
+});
+
+$("#uploadsubmit").click(function(){
+    var description = $("#uploadDescription").val();
+    console.log("Submitting a photo: " + description);
+    $("#description").val(description);
+    $("#uploadsubmit").hide();
+    $("#uploadProgress").show();
+    $("#uploadPic").click();
+});
+
 //$(':button').on('click', function() 
 $(document.getElementById("uploadPic")).on('click', function()
 {
@@ -213,11 +257,22 @@ $(document.getElementById("uploadPic")).on('click', function()
                     if (e.lengthComputable) {
                         $('progress').attr({
                             value: e.loaded,
-                            max: e.total,
-                            success: fetchPhotos()
+                            max: e.total//,
+                            // success: fetchPhotos()
                         });
+                        // if(e.loaded == e.total){
+                        //     $("uploadmodal").modal("close");
+                        //     fetchPhotos();
+                        // }
                     }
                 } , false);
+                myXhr.upload.addEventListener('load', function(){
+                    $("#uploadmodal").modal("close");
+                    setTimeout(function(){
+                        fetchPhotos();
+                    }, 1500);
+                    
+                })
             }
             return myXhr;
         }

@@ -15,16 +15,23 @@
     right: 50%;
 }
 
-<<<<<<< HEAD
-.twohundred{
-    height: 200px;
-    width: 200px;
-    border: 2px solid black;
+.invisible{
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+}
+
+.dropzone{
+    position: fixed;
+    left: 0;
+    
+    z-index: 2;
+    height: 50px;
+    width: 100%;
+    border: 2px dashed gray;
+    border-radius: 15px;
     text-align: center;
 }
-=======
-
-
 
 #bar {
     width: 100%;
@@ -49,7 +56,3 @@
     padding: 14px 16px;
     font-family: monospace;
 }
-
-
-
->>>>>>> 532aaf991cc065d080cad7247d2a27609be2f322
