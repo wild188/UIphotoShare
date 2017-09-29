@@ -78,6 +78,7 @@ function showPhoto(photoID) {
 function getPhoto(photoID, imageTag, descriptionTag){
     $endpoint = $path_to_backend + 'viewPhoto.php' + '?id=' + photoID;
     modalheight = $("#modal1").height();
+    modalwidth =  $("#modal1").width();
     $.getJSON($endpoint, function(data)
     {
         var photo = data[0];
@@ -86,7 +87,10 @@ function getPhoto(photoID, imageTag, descriptionTag){
         $("<img />")
         .attr("src", $path_to_backend + photo.src)
         .attr("class", "photoView")
-        .height(modalheight * .7)
+        .css('max-height', modalheight * .7)
+        .css('max-width', modalwidth * .9)
+        //.height(modalheight * .7)
+        //.width(modalwidth * .9)
         .appendTo(imageTag);
 
         descriptionTag.empty();
