@@ -35,14 +35,14 @@
     <p><br/><br/></p>
 
     <div id="uploadDrop" class="center-align">
-            Drag'N Drop Uploads Below or Browse
+            <h3>Drag'N Drop Uploads Below or Browse</h3>
         <form id="uploader" name="uploader" enctype="multipart/form-data" style="margin-left: 45px;">
             <input id="fileinput" name="fupload" type="file" class="dropzone"/>
             <p class="invisible"><label for="description">Enter a Description: </label><br>
             <textarea rows="3" cols="50" id="description" name="description" style="width:500px"></textarea></p>
             <input class="invisible" type="button" value="Upload Photo" id="uploadPic">
         </form>
-    </div>
+    </div><br><br><br>
     
     <div style="align-items: center; padding: 10px" id="thumbs"></div>
 
@@ -51,15 +51,15 @@
             <div class="modal-content">
                 <button id="exitModal" class="modal-action modal-close waves-effect waves-green btn-flat col s2 push-s6" style="float:right;"><img src="close.png" style="width:12px;height:12px;"></button>
               <div class="center-align" id="photoDiv">
-        
+                    
               </div>
               <div id="descriptionDiv">
         
               </div>
             </div>
             <div class="modal-footer row">
-                <button id="singleDelete" class="modal-action modal-close waves-effect waves-green btn-flat red col s2">Delete</button>
-                <button id="edit" class="waves-effect waves-green btn-flat green col s2 push-s6">Edit</button>
+                <button id="singleDelete" class="modal-action modal-close waves-effect waves-green btn-flat red col s2 push-s8">Delete</button>
+                <button id="edit" class="waves-effect waves-green btn-flat green col s2">Edit</button>
                 <!-- <a id="exitModal" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat col s2">Exit</a> -->
             </div>
           </div>
@@ -82,7 +82,6 @@
             <button id="uploadsubmit" class="waves-effect waves-green btn-flat green col s2">Submit</button>
             <a id="exitModal" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat col s2 push-s8">Cancel</a>
         </div>
-      </div>
 
     <script src="main.js"></script>
 </body>
