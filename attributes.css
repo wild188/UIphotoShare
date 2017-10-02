@@ -11,3 +11,7 @@
 .giveborder{
     border: solid;
 }
+
+.tn:hover{
+    border: solid;
+}
