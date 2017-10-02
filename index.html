@@ -26,23 +26,23 @@
     <div class="navbar">
         <ul id="bar">
             <li id="a">My 331 Photos</li>
-            <li><button id="select" class="giveborder" style="float:right; margin-right: 2%; margin-top: 10px">Select Multiple Photos</button>
+            <li><button id="select" class="giveborder" style="float:right; margin-right: 2%; margin-top: 10px">Select Multiple Photos for Deletion</button>
         </ul>
     </div>
     
-    <button id="cancel" class="giveborder forDelete" style="float:right; margin-right:50px;">Cancel</button>
-    <button id="delButton" class="giveborder forDelete" style="float:right; margin-right: 2%">Delete</button>
+    <button id="cancel" class="giveborder forDelete" style="z-index:2; float:right; margin-right:50px;">Cancel</button>
+    <button id="delButton" class="giveborder forDelete" style="z-index:2; float:right; margin-right: 2%">Delete</button>
     <p><br/><br/></p>
 
     <div id="uploadDrop" class="center-align">
             <h3>Drag'N Drop Uploads Below or Browse</h3>
-        <form id="uploader" name="uploader" enctype="multipart/form-data" style="margin-left: 45px;">
+        <form id="uploader" name="uploader" enctype="multipart/form-data">
             <input id="fileinput" name="fupload" type="file" class="dropzone"/>
             <p class="invisible"><label for="description">Enter a Description: </label><br>
             <textarea rows="3" cols="50" id="description" name="description" style="width:500px"></textarea></p>
             <input class="invisible" type="button" value="Upload Photo" id="uploadPic">
         </form>
-    </div><br><br><br>
+    </div><br><br>
     
     <div style="align-items: center; padding: 10px" id="thumbs"></div>
 

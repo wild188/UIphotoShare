@@ -19,10 +19,11 @@
     visibility: hidden;
     height: 0px;
     width: 0px;
+    margin: 0px;
 }
 
 .dropzone{
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     width: 96%;
     margin-left: 2%;
