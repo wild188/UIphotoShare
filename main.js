@@ -62,6 +62,8 @@ function showPhoto(photoID) {
         $("#modal1").modal("open");
         getPhoto(photoID, $("#photoDiv"), $("#descriptionDiv"));
         $("#singleDelete").off("click");
+        $("#singleDelete").html("Delete");
+        //$("#singleDelete").addClass("modal-action modal-close");
         $("#singleDelete").click(function () {
             deletePhoto(photoID)
         });
@@ -111,8 +113,13 @@ function updateDescription(photoID, description){
 }
 
 function allowUpdate(photoID){
-    $("#singleDelete").addClass("disabled");
-    //$("#singleDelete").off("click");
+    //$("#singleDelete").removeClass("modal-action modal-close");
+    $("#singleDelete").html("Cancel");
+    $("#singleDelete").off("click");
+    $("#singleDelete").click(function(event){
+        event.stopPropagation();
+        showPhoto(photoID)});
+    //$("#singleDelete").addClass("");
     //$("#exitModal").addClass("disabled");
     $("#edit").off("click");
     $("#edit").html("Submit Change");
@@ -135,6 +142,7 @@ function allowUpdate(photoID){
     $("#edit").click(function(){
         updateDescription(photoID, $("#editDescription").val())
     });
+
 }
 
 function uploadPhoto(photoFile, description){
