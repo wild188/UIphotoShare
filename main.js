@@ -190,6 +190,12 @@ $(document.getElementById("fileinput")).change(function()
     }
     $("#uploadProgress").hide();
     $("#uploadsubmit").show();
+    $("#exitUploadModal").click(function(){
+        $("#uploader")[0].reset();
+    });
+    $("#cancelUploadModal").click(function(){
+        $("#uploader")[0].reset();
+    });
     console.log($("#fileinput").prop("files")[0]);
     $("#uploadmodal").modal("open");
     modalheight = $("#uploadmodal").height();
