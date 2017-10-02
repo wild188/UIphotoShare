@@ -113,19 +113,24 @@ function updateDescription(photoID, description){
 function allowUpdate(photoID){
     $("#singleDelete").addClass("disabled");
     //$("#singleDelete").off("click");
-    $("#exitModal").addClass("disabled");
+    //$("#exitModal").addClass("disabled");
     $("#edit").off("click");
     $("#edit").html("Submit Change");
 
+    var oldDescription = $("#photoDescription").text();
     $("#descriptionDiv").empty();
     $("<input/>")
         .attr("id", "editDescription")
         //.attr("class", "disabled")
         .attr("type", "text")
         //.prop('disabled', true)//.attr("disabled")
-        .val($("#photoDescription").html())
+        .val(oldDescription)
         //.html(photo.description)
         .appendTo($("#descriptionDiv"));
+    
+        console.log($("#photoDescription").text());
+        $("#editDescription").focus();
+
 
     $("#edit").click(function(){
         updateDescription(photoID, $("#editDescription").val())
@@ -195,6 +200,7 @@ $(document.getElementById("fileinput")).change(function()
         //.prop('disabled', true)//.attr("disabled")
         //.html(photo.description)
         .appendTo($("#uploadDescriptionDiv"));
+    $("#uploadDescription").focus();
 });
 
 $("#uploadsubmit").click(function(){
