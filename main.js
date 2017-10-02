@@ -132,11 +132,17 @@ function allowUpdate(photoID){
         .attr("type", "text")
         //.prop('disabled', true)//.attr("disabled")
         .val(oldDescription)
+        
         //.html(photo.description)
         .appendTo($("#descriptionDiv"));
     
         console.log($("#photoDescription").text());
         $("#editDescription").focus();
+        $("#editDescription").keypress(function (e) {
+            if (e.which == 13) {
+                updateDescription(photoID, $("#editDescription").val());
+            }
+        });
 
 
     $("#edit").click(function(){
@@ -209,10 +215,19 @@ $(document.getElementById("fileinput")).change(function()
         //.html(photo.description)
         .appendTo($("#uploadDescriptionDiv"));
     $("#uploadDescription").focus();
+    $("#uploadDescription").keypress(function (e) {
+        if (e.which == 13) {
+            $("#uploadsubmit").click();
+        }
+    });
 });
 
 $("#uploadsubmit").click(function(){
     var description = $("#uploadDescription").val();
+    if(description == "" || description == null){
+        alert("No description provided");
+        return;
+    }
     console.log("Submitting a photo: " + description);
     $("#description").val(description);
     $("#uploadsubmit").hide();
